@@ -35,7 +35,7 @@ public class bearController : MonoBehaviour {
 	void FixedUpdate ()
 	{
 
-		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
+		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 		anim.SetBool ("ground", grounded);
 
 
