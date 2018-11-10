@@ -50,10 +50,14 @@ public class PlayerMove : MonoBehaviour {
         if ((grounded) && Input.GetButtonDown("Jump"))
         {
             //anim.SetBool("isJumping", true);
-            doubleJump = !doubleJump;
+            doubleJump = true;
             anim.SetBool("isGrounded", false);
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, jumpForce);
             
+        }
+        else
+        {
+            doubleJump = false;
         }
 
         if ((!grounded) && Input.GetButtonDown("Jump") && doubleJump)
@@ -75,7 +79,15 @@ public class PlayerMove : MonoBehaviour {
 
         GetComponent<Rigidbody2D>().velocity = new Vector2((hInput * runSpeed), GetComponent<Rigidbody2D>().velocity.y);
 
-        //if (Input.GetButtonDown("Fire1") && (grounded)) { anim.SetTrigger("Punch"); }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            anim.SetBool("isThrowing", true);
+            anim.SetTrigger("throw");
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            anim.SetBool("isThrowing", false);
+        }
 
         //if (Input.GetButton("Fire2"))
         //{
