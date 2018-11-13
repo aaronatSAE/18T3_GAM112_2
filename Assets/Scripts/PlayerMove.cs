@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour {
     private bool grounded = false;
     private float groundRadius = 0.15f;
     private bool isJumping = false;
-    private bool doubleJump = false;
+    private bool doubleJump = true;
     private float jumpForce = 5f;
 
     private Animator anim;
@@ -53,10 +53,13 @@ public class PlayerMove : MonoBehaviour {
             doubleJump = true;
             anim.SetBool("isGrounded", false);
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, jumpForce);
+            Debug.Log(doubleJump);
+            
             
         }
         else
         {
+            Debug.Log(doubleJump);
             doubleJump = false;
         }
 
@@ -74,7 +77,7 @@ public class PlayerMove : MonoBehaviour {
         }
 
         anim.SetFloat("speed", Mathf.Abs(hInput));
-        anim.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
+        //anim.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
 
 
         GetComponent<Rigidbody2D>().velocity = new Vector2((hInput * runSpeed), GetComponent<Rigidbody2D>().velocity.y);
