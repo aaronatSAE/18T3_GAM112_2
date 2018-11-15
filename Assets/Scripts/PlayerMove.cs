@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour {
     private float groundRadius = 0.15f;
     private bool isJumping = false;
     private bool doubleJump = true;
-    private float jumpForce = 5f;
+    private float jumpForce = 7.5f;
 
     private Animator anim;
 
@@ -36,7 +36,25 @@ public class PlayerMove : MonoBehaviour {
 
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         anim.SetBool("isGrounded", grounded);
-        
+
+        if ((grounded) && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
+        {
+            //anim.SetBool("isJumping", true);
+            doubleJump = true;
+            anim.SetBool("isGrounded", false);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, jumpForce);
+            Debug.Log(doubleJump);
+
+
+        }
+        else if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)) && doubleJump)
+        {
+            Debug.Log("test");
+            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, 0f);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, jumpForce);
+            anim.Play("Jumping");
+            doubleJump = !doubleJump;
+        }
 
     }
 
@@ -47,29 +65,14 @@ public class PlayerMove : MonoBehaviour {
 
        
 
-        if ((grounded) && Input.GetButtonDown("Jump"))
-        {
-            //anim.SetBool("isJumping", true);
-            doubleJump = true;
-            anim.SetBool("isGrounded", false);
-            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, jumpForce);
-            Debug.Log(doubleJump);
-            
-            
-        }
-        else
-        {
-            Debug.Log(doubleJump);
-            doubleJump = false;
-        }
+        
+        //else
+        //{
+        //    Debug.Log(doubleJump);
+        //    doubleJump = false;
+        //}
 
-        if ((!grounded) && Input.GetButtonDown("Jump") && doubleJump)
-        {
-            Debug.Log("test");
-            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, jumpForce);
-            anim.Play("Jumping");
-            doubleJump = !doubleJump;
-        }
+       
 
         if (!Input.GetButton("Horizontal"))
         {
