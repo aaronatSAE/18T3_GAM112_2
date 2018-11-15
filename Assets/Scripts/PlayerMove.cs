@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
 
+    public GameObject carrot;
+    public Transform spawnPoint;
+
     private float runSpeed = 10f;
-    //private float maxVertHSpeed = 20f;
     private bool facingRight = true;
     private float hInput;
 
@@ -21,6 +23,7 @@ public class PlayerMove : MonoBehaviour {
     private bool doubleJump = true;
     private float jumpForce = 7.5f;
 
+    private bool isThrowing = true;
     private Animator anim;
 
 
@@ -63,17 +66,17 @@ public class PlayerMove : MonoBehaviour {
 
         hInput = Input.GetAxisRaw("Horizontal");
 
-       
+        // change direction of spawn point, so carrots fire in the right direction
+        if (!facingRight)
+        {
+            spawnPoint.rotation = new Quaternion(0, 180f, 0, 0);
+        }
+        else
+        {
+            spawnPoint.rotation = Quaternion.identity;
+        }
 
-        
-        //else
-        //{
-        //    Debug.Log(doubleJump);
-        //    doubleJump = false;
-        //}
-
-       
-
+        // slow down the rabbit soon as the button is released
         if (!Input.GetButton("Horizontal"))
         {
             hInput = 0f;
@@ -87,32 +90,28 @@ public class PlayerMove : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1"))
         {
-            anim.SetBool("isThrowing", true);
-            anim.SetTrigger("throw");
+            if (isThrowing)
+            {
+                StartCoroutine(SpawnCarrot());
+                isThrowing = !isThrowing;
+            }
+            
+            
         }
         if (Input.GetButtonUp("Fire1"))
         {
             anim.SetBool("isThrowing", false);
         }
 
-        //if (Input.GetButton("Fire2"))
-        //{
-        //    anim.SetBool("Sprint", true);
-        //    runSpeed = 14f;
-        //}
-        //else
-        //{
-        //    anim.SetBool("Sprint", false);
-        //    runSpeed = 10f;
-        //}
-
+        
         //Flipping direction character is facing based on players Input
         if (hInput > 0 && !facingRight)
             Flip();
         else if (hInput < 0 && facingRight)
             Flip();
     }
-    ////Flipping direction of character
+
+    // flipping direction of character
     void Flip()
     {
         facingRight = !facingRight;
@@ -121,5 +120,25 @@ public class PlayerMove : MonoBehaviour {
         transform.localScale = theScale;
     }
 
-   
+    // spawning carrot
+    private IEnumerator SpawnCarrot()
+    {
+        anim.SetBool("isThrowing", true);
+        anim.SetTrigger("throw");
+
+        GameObject newCarrot = Instantiate(carrot, (new Vector2(spawnPoint.position.x, spawnPoint.position.y)), spawnPoint.rotation) as GameObject;
+
+        yield return new WaitForSeconds(0.5f);
+        isThrowing = !isThrowing;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Barrel")
+        {
+            //if(collision.contacts[1].point)
+        }
+    }
+
+
 }
