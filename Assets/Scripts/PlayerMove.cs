@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour {
     private bool doubleJump = true;
     private float jumpForce = 7.5f;
 
+    private bool hitTaken = false;
     private bool isThrowing = true;
     private Animator anim;
 
@@ -43,18 +44,17 @@ public class PlayerMove : MonoBehaviour {
         if ((grounded) && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
         {
             //anim.SetBool("isJumping", true);
+            Jump(jumpForce);
             doubleJump = true;
             anim.SetBool("isGrounded", false);
-            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, jumpForce);
-            Debug.Log(doubleJump);
-
 
         }
+
         else if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)) && doubleJump)
         {
-            Debug.Log("test");
+            
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, 0f);
-            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, jumpForce);
+            Jump(jumpForce);
             anim.Play("Jumping");
             doubleJump = !doubleJump;
         }
@@ -132,13 +132,43 @@ public class PlayerMove : MonoBehaviour {
         isThrowing = !isThrowing;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D coll)
+
     {
-        if(collision.gameObject.tag == "Barrel")
+        Animator anim = coll.gameObject.GetComponentInChildren<Animator>();
+
+        if (coll.gameObject.tag == "Barrel")
         {
-            //if(collision.contacts[1].point)
+            if (coll.contacts[0].normal.x < 0f)
+            {
+                if (!hitTaken)
+                {
+                    hitTaken = !hitTaken;
+                    StartCoroutine(TakeHit());
+                    Debug.Log("hit left ");
+                }
+                
+            }
+            else if (coll.contacts[0].normal.y > 0f)
+            {
+                Jump((jumpForce* 1.5f));
+                Debug.Log("hit top ");
+            }
+
         }
     }
 
+    private IEnumerator TakeHit()
+    {
+        anim.SetBool("isHit", true);
+        yield return new WaitForSeconds(0.2f);
+        anim.SetBool("isHit", false);
+        hitTaken = !hitTaken;
 
+    }
+
+    private void Jump(float force)
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, force);
+    }
 }

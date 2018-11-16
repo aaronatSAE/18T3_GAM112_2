@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4333688638492200}
   - component: {fileID: 212317425197012262}
+  - component: {fileID: 95047802632375968}
+  - component: {fileID: 111933141537567592}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -51,7 +53,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1888254553562946}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.07, y: 3.84, z: -1.24}
   m_LocalScale: {x: 0.1297576, y: 0.1297576, z: 0.1297576}
   m_Children:
@@ -117,6 +119,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20.09, y: 4.7}
   m_EdgeRadius: 0
+--- !u!95 &95047802632375968
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848650335699738}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: daad9283e5de50e4dabc2d2a91b8445f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &111933141537567592
+Animation:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848650335699738}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 00593b8fe477a2d45baa5fd0647d5f21, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114952927893140604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,7 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a59abc928a7e49418c7fd28566e8b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carrotSprite: {fileID: 4333688638492200}
+  speed: 15
   power: 1000
+  rotateSpeed: 125
 --- !u!212 &212317425197012262
 SpriteRenderer:
   m_ObjectHideFlags: 1
