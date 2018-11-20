@@ -58,6 +58,7 @@ public class Carrot : MonoBehaviour {
         if(coll.gameObject.tag == "Lever")
         {
             coll.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            coll.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             coll.gameObject.SendMessage("ActivateLever");
             leverHit = !leverHit;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;

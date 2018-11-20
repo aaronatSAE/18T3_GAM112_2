@@ -1186,7 +1186,7 @@ GameObject:
   - component: {fileID: 785673655}
   - component: {fileID: 785673654}
   m_Layer: 5
-  m_Name: Image LifeBarFull
+  m_Name: Image LifeBarFull3
   m_TagString: LifeBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1762,7 +1762,7 @@ GameObject:
   - component: {fileID: 1254877441}
   - component: {fileID: 1254877440}
   m_Layer: 5
-  m_Name: Image LifeBarFull
+  m_Name: Image LifeBarFull1
   m_TagString: LifeBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1901,7 +1901,7 @@ GameObject:
   - component: {fileID: 1307121129}
   - component: {fileID: 1307121128}
   m_Layer: 5
-  m_Name: Image LifeBarFull
+  m_Name: Image LifeBarFull2
   m_TagString: LifeBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

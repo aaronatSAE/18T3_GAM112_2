@@ -18,10 +18,7 @@ public class PlayerHealth : MonoBehaviour {
     {
         scoreTxt = scoreTxt.GetComponent<TextMeshProUGUI>();
         lifeHeart = GameObject.FindGameObjectsWithTag("LifeBar").OrderBy(go => go.name).ToArray();
-        foreach(GameObject life in lifeHeart)
-        {
-            Debug.Log(life);
-        }
+        
 		
 	}
 
