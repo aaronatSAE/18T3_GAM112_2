@@ -17,7 +17,7 @@ public class Barrel : MonoBehaviour {
 
     private void Awake()
     {
-        //hpScript = GameObject.FindGameObjectWithTag("ScriptManager").GetComponent<PlayerHealth>();
+        hpScript = GameObject.FindGameObjectWithTag("ScriptManager").GetComponent<PlayerHealth>();
     }
 
     private void Start()
@@ -52,7 +52,7 @@ public class Barrel : MonoBehaviour {
             if (coll.contacts[0].normal.x > 0f)
             {
                 rb.AddForce(-transform.right * hitAmount);
-                //hpScript.life -= 1;
+                hpScript.life -= 1;
                 Debug.Log("hit left ");
             }
             else if (coll.contacts[0].normal.y < 0f)

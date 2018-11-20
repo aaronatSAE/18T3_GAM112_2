@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class PlayerHealth : MonoBehaviour {
 
@@ -16,7 +17,11 @@ public class PlayerHealth : MonoBehaviour {
 	void Start ()
     {
         scoreTxt = scoreTxt.GetComponent<TextMeshProUGUI>();
-        lifeHeart = GameObject.FindGameObjectsWithTag("LifeBar");
+        lifeHeart = GameObject.FindGameObjectsWithTag("LifeBar").OrderBy(go => go.name).ToArray();
+        foreach(GameObject life in lifeHeart)
+        {
+            Debug.Log(life);
+        }
 		
 	}
 
@@ -35,14 +40,14 @@ public class PlayerHealth : MonoBehaviour {
                 lifeHeart[0].SetActive(false);
                 break;
             case 1:
-                lifeHeart[2].SetActive(true);
+                lifeHeart[2].SetActive(false);
                 lifeHeart[1].SetActive(false);
-                lifeHeart[0].SetActive(false);
+                lifeHeart[0].SetActive(true);
                 break;
             case 2:
-                lifeHeart[2].SetActive(true);
+                lifeHeart[2].SetActive(false);
                 lifeHeart[1].SetActive(true);
-                lifeHeart[0].SetActive(false);
+                lifeHeart[0].SetActive(true);
                 break;
             case 3:
                 lifeHeart[2].SetActive(true);
