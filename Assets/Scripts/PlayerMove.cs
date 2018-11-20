@@ -38,15 +38,16 @@ public class PlayerMove : MonoBehaviour {
     void FixedUpdate()
     {
 
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        anim.SetBool("isGrounded", grounded);
+
+        
+       
 
         if ((grounded) && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
         {
             //anim.SetBool("isJumping", true);
             Jump(jumpForce);
             doubleJump = true;
-            anim.SetBool("isGrounded", false);
+            //anim.SetBool("isGrounded", false);
 
         }
 
@@ -55,7 +56,7 @@ public class PlayerMove : MonoBehaviour {
             
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, 0f);
             Jump(jumpForce);
-            anim.Play("Jumping");
+            //anim.Play("Jumping");
             doubleJump = !doubleJump;
         }
 
@@ -63,6 +64,22 @@ public class PlayerMove : MonoBehaviour {
 
     void Update()
     {
+
+        if (Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround))
+        {
+            
+            grounded = true;
+            print("asdasd");
+            anim.SetBool("isGrounded", grounded);
+        }
+        else
+        {
+            print("blahsls");
+            grounded = false;
+            anim.SetBool("isGrounded", grounded);
+        }
+
+        anim.SetBool("isGrounded", grounded);
 
         hInput = Input.GetAxisRaw("Horizontal");
 

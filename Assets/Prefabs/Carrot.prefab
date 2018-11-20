@@ -165,7 +165,7 @@ MonoBehaviour:
   carrotSprite: {fileID: 4333688638492200}
   speed: 15
   power: 1000
-  rotateSpeed: 125
+  rotateSpeed: 200
 --- !u!212 &212317425197012262
 SpriteRenderer:
   m_ObjectHideFlags: 1
