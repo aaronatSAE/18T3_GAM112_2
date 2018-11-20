@@ -648,6 +648,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 191616, guid: b065ee042ab195f4e8cdd1b0ccdbcba7,
     type: 2}
   m_PrefabInternal: {fileID: 586359459}
+--- !u!58 &509735048
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 509735047}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.6}
+  serializedVersion: 2
+  m_Radius: 1.64
 --- !u!19719996 &509735053
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -751,7 +766,7 @@ Prefab:
     - target: {fileID: 114790320680772102, guid: b065ee042ab195f4e8cdd1b0ccdbcba7,
         type: 2}
       propertyPath: whatIsGround.m_Bits
-      value: 4294967295
+      value: 768
       objectReference: {fileID: 0}
     - target: {fileID: 61617727520681860, guid: b065ee042ab195f4e8cdd1b0ccdbcba7,
         type: 2}
@@ -924,6 +939,11 @@ Prefab:
         type: 2}
       propertyPath: m_BackGroundColor.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61617727520681860, guid: b065ee042ab195f4e8cdd1b0ccdbcba7,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.67
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b065ee042ab195f4e8cdd1b0ccdbcba7, type: 2}
@@ -1972,7 +1992,7 @@ GameObject:
   - component: {fileID: 1456709918}
   - component: {fileID: 1456709917}
   - component: {fileID: 1456709916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap-Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5012,7 +5032,7 @@ GameObject:
   - component: {fileID: 1596273316}
   - component: {fileID: 1596273315}
   - component: {fileID: 1596273314}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap-Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15968,7 +15988,7 @@ GameObject:
   - component: {fileID: 1871035139}
   - component: {fileID: 1871035138}
   - component: {fileID: 1871035137}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Moving Platform (Up/Down)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16082,7 +16102,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1947291688}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.9, y: -0.1, z: 0}
+  m_LocalPosition: {x: 12.9, y: -0, z: 0}
   m_LocalScale: {x: 0.756, y: 0.9999998, z: 1}
   m_Children: []
   m_Father: {fileID: 1253826363}

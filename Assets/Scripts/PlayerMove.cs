@@ -43,22 +43,22 @@ public class PlayerMove : MonoBehaviour {
 
 
 
-        if ((grounded) && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
+        if ((grounded) && (Input.GetButtonDown("Jump")))
         {
-            anim.SetBool("isJumping", true);
+            //anim.SetBool("isJumping", true);
             Jump(jumpForce);
             doubleJump = true;
             anim.SetBool("isGrounded", false);
 
         }
 
-        else if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)) && doubleJump)
+        else if ((Input.GetButtonDown("Jump")) && doubleJump)
         {
             
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, 0f);
             Jump(jumpForce);
             anim.Play("Jumping");
-            doubleJump = !doubleJump;
+            doubleJump = false;
         }
 
     }
