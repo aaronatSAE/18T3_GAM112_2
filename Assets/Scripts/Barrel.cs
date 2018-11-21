@@ -12,12 +12,12 @@ public class Barrel : MonoBehaviour {
     //if hit by carrot, stop rolling
     public bool carrotHit = false;
 
-    private PlayerHealth hpScript;
+    private PlayerStats hpScript;
     private Rigidbody2D barrelRB;
 
     private void Awake()
     {
-        hpScript = GameObject.FindGameObjectWithTag("ScriptManager").GetComponent<PlayerHealth>();
+        hpScript = GameObject.FindGameObjectWithTag("ScriptManager").GetComponent<PlayerStats>();
     }
 
     private void Start()
@@ -35,6 +35,10 @@ public class Barrel : MonoBehaviour {
         if (!carrotHit)
         {
             barrelRB.AddForce(-transform.right * speed);
+        }
+        else
+        {
+            barrelRB.velocity = Vector3.zero;
         }
         
         

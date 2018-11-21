@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
 
+    public PlayerStats playerStats;
     public GameObject carrot;
     public Transform spawnPoint;
 
@@ -167,12 +168,18 @@ public class PlayerMove : MonoBehaviour {
                 }
                 
             }
+
             else if (coll.contacts[0].normal.y > 0f)
             {
                 Jump((jumpForce* 1.5f));
                 Debug.Log("hit top ");
             }
 
+        }
+        else if(coll.gameObject.tag == "CarrotPickup")
+        {
+            playerStats.score += 10f;
+            Destroy(coll.gameObject);
         }
     }
 

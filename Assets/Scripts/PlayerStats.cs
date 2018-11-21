@@ -6,11 +6,11 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 
-public class PlayerHealth : MonoBehaviour {
+public class PlayerStats : MonoBehaviour {
 
     private GameObject[] lifeHeart;
     public int life = 3;
-    public int score;
+    public float score = 0f;
     public TextMeshProUGUI scoreTxt;
 
 	// Use this for initialization
@@ -25,8 +25,9 @@ public class PlayerHealth : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        scoreTxt.text = score.ToString();
-
+        score += Time.deltaTime;
+        scoreTxt.text = score.ToString("F0");
+    
         // player lives, heart symbols top left hand corner
         switch (life)
         {
