@@ -178,9 +178,19 @@ public class PlayerMove : MonoBehaviour {
         }
         else if(coll.gameObject.tag == "CarrotPickup")
         {
-            playerStats.score += 10f;
+            playerStats.score += 1;
             Destroy(coll.gameObject);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "BarrierTrigger")
+        {
+            
+        }
+        print("finish test");
+
     }
 
     private IEnumerator TakeHit()

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Barrel : MonoBehaviour {
 
+    public GameObject carrots;
+    public Transform[] spawnPoints;
     public GameObject anim;
     public Transform spawn;
-    public float speed;
+    public float speed = 1f;
     public float hitAmount = 1000f;
+    public float force = 10f;
 
     //if hit by carrot, stop rolling
     public bool carrotHit = false;
@@ -25,16 +28,12 @@ public class Barrel : MonoBehaviour {
         barrelRB = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        speed += Time.deltaTime;
-    }
 
     private void FixedUpdate()
     {
         if (!carrotHit)
         {
-            barrelRB.AddForce(-transform.right * speed);
+            barrelRB.velocity = Vector2.left * speed;
         }
         else
         {
@@ -62,6 +61,15 @@ public class Barrel : MonoBehaviour {
             else if (coll.contacts[0].normal.y < 0f)
             {
                 GameObject newAnim = Instantiate(anim, spawn.position, Quaternion.identity) as GameObject;
+                for(int i = 0; i< spawnPoints.Length; ++i)
+                {
+                    float z = Random.Range(spawnPoints[i].rotation.z - 2f, spawnPoints[i].rotation.z + 2f);
+                    Quaternion newRot = new Quaternion(0f, 0f, z, 0f);
+                    GameObject newCarrot = Instantiate(carrots, spawnPoints[i].position, newRot);
+                    StartCoroutine(ColliderOnOff(newCarrot));
+                    Rigidbody2D rbTwo = newCarrot.GetComponent<Rigidbody2D>();
+                    rbTwo.AddForce(spawnPoints[i].up * force);
+                }
                 Destroy(newAnim, 2.5f);
                 Destroy(gameObject);
                 //Jump();
@@ -69,5 +77,12 @@ public class Barrel : MonoBehaviour {
             }
 
         }
+    }
+
+    IEnumerator ColliderOnOff(GameObject carrot)
+    {
+        carrot.GetComponent<CircleCollider2D>().enabled = false;
+        yield return new WaitForSeconds(1);
+        carrot.GetComponent<CircleCollider2D>().enabled = true;
     }
 }

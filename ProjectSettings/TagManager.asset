@@ -9,6 +9,7 @@ TagManager:
   - LifeBar
   - Lever
   - CarrotPickup
+  - BarrelTrigger
   layers:
   - Default
   - TransparentFX
