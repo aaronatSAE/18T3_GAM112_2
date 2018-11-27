@@ -11,6 +11,7 @@ public class Barrel : MonoBehaviour {
     public float speed = 1f;
     public float hitAmount = 1000f;
     public float force = 10f;
+    private float timer = 0f;
 
     //if hit by carrot, stop rolling
     public bool carrotHit = false;
@@ -28,7 +29,10 @@ public class Barrel : MonoBehaviour {
         barrelRB = GetComponent<Rigidbody2D>();
     }
 
-
+    private void Update()
+    {
+        timer += Time.deltaTime;
+    }
     private void FixedUpdate()
     {
         if (!carrotHit)
@@ -63,10 +67,15 @@ public class Barrel : MonoBehaviour {
                 GameObject newAnim = Instantiate(anim, spawn.position, Quaternion.identity) as GameObject;
                 for(int i = 0; i< spawnPoints.Length; ++i)
                 {
+                    timer = 0;
                     float z = Random.Range(spawnPoints[i].rotation.z - 2f, spawnPoints[i].rotation.z + 2f);
                     Quaternion newRot = new Quaternion(0f, 0f, z, 0f);
                     GameObject newCarrot = Instantiate(carrots, spawnPoints[i].position, newRot);
-                    StartCoroutine(ColliderOnOff(newCarrot));
+                    newCarrot.GetComponent<CircleCollider2D>().enabled = false;
+                    if (timer > 2f)
+                    {
+                        newCarrot.GetComponent<CircleCollider2D>().enabled = true;
+                    }
                     Rigidbody2D rbTwo = newCarrot.GetComponent<Rigidbody2D>();
                     rbTwo.AddForce(spawnPoints[i].up * force);
                 }
@@ -79,10 +88,12 @@ public class Barrel : MonoBehaviour {
         }
     }
 
-    IEnumerator ColliderOnOff(GameObject carrot)
-    {
-        carrot.GetComponent<CircleCollider2D>().enabled = false;
-        yield return new WaitForSeconds(1);
-        carrot.GetComponent<CircleCollider2D>().enabled = true;
-    }
+    //IEnumerator ColliderOnOff(GameObject carrot)
+    //{
+    //    carrot.GetComponent<CircleCollider2D>().enabled = false;
+    //    yield return new WaitForSeconds(1);
+    //    print("testing coroutine");
+    //    carrot.GetComponent<CircleCollider2D>().enabled = true;
+    //    yield return new WaitForSeconds(1);
+    //}
 }
