@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerrespwn : MonoBehaviour {
+public class PlayerRespawn : MonoBehaviour {
 
     [SerializeField] Transform spwnPoint;
 

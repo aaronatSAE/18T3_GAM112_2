@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BackgroudMover : MonoBehaviour {
 
-    public Transform player;
+    public Transform cam;
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 newPos = new Vector3(player.position.x, player.position.y + 5f, player.position.z);
+        Vector2 newPos = new Vector2(cam.position.x, cam.position.y + 5f);
         transform.position = newPos;
 		
 	}

@@ -7,6 +7,8 @@ public class PlayerMove : MonoBehaviour {
     public PlayerStats playerStats;
     public GameObject carrot;
     public Transform spawnPoint;
+    public GameObject cam;
+    public GameObject loseBoard;
 
     private float runSpeed = 10f;
     private bool facingRight = true;
@@ -68,73 +70,84 @@ public class PlayerMove : MonoBehaviour {
     void Update()
     {
 
-        if (gameOver)
+
+        if (playerStats.life <= 0)
         {
-            if (playerStats.life <= 0)
+            
+            if (!gameOver)
             {
                 LoseGame();
+                gameOver = true;
             }
-            gameOver = false;
-        }
-        
-
-        hInput = Input.GetAxisRaw("Horizontal");
-
-        // change direction of spawn point, so carrots fire in the right direction
-        if (!facingRight)
-        {
-            spawnPoint.rotation = new Quaternion(0, 180f, 0, 0);
-        }
-        else
-        {
-            spawnPoint.rotation = Quaternion.identity;
+            
         }
 
-        // slow down the rabbit soon as the button is released
-        if (!Input.GetButton("Horizontal"))
+
+
+        if (!gameOver)
         {
-            hInput = 0f;
-        }
 
-        anim.SetFloat("speed", Mathf.Abs(hInput));
-        //anim.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
+            hInput = Input.GetAxisRaw("Horizontal");
 
-
-        GetComponent<Rigidbody2D>().velocity = new Vector2((hInput * runSpeed), GetComponent<Rigidbody2D>().velocity.y);
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (isThrowing)
+            // change direction of spawn point, so carrots fire in the right direction
+            if (!facingRight)
             {
-                if (playerStats.score > 0)
+                spawnPoint.rotation = new Quaternion(0, 180f, 0, 0);
+            }
+            else
+            {
+                spawnPoint.rotation = Quaternion.identity;
+            }
+
+            // slow down the rabbit soon as the button is released
+            if (!Input.GetButton("Horizontal"))
+            {
+                hInput = 0f;
+            }
+
+            anim.SetFloat("speed", Mathf.Abs(hInput));
+            //anim.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
+
+
+            GetComponent<Rigidbody2D>().velocity = new Vector2((hInput * runSpeed), GetComponent<Rigidbody2D>().velocity.y);
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (isThrowing)
                 {
-                    playerStats.score -= 1;
-                    StartCoroutine(SpawnCarrot());
-                    isThrowing = !isThrowing;
+                    if (playerStats.score > 0)
+                    {
+                        playerStats.score -= 1;
+                        StartCoroutine(SpawnCarrot());
+                        isThrowing = !isThrowing;
+                    }
+
                 }
 
+
+            }
+            if (Input.GetButtonUp("Fire1"))
+            {
+                anim.SetBool("isThrowing", false);
             }
 
 
-        }
-        if (Input.GetButtonUp("Fire1"))
-        {
-            anim.SetBool("isThrowing", false);
+            //Flipping direction character is facing based on players Input
+            if (hInput > 0 && !facingRight)
+                Flip();
+            else if (hInput < 0 && facingRight)
+                Flip();
         }
 
-
-        //Flipping direction character is facing based on players Input
-        if (hInput > 0 && !facingRight)
-            Flip();
-        else if (hInput < 0 && facingRight)
-            Flip();
     }
 
     //
     private void LoseGame()
     {
         Jump((jumpForce * 1.5f));
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        cam.transform.parent = null;
+        loseBoard.SetActive(true);
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
 
     }
 
@@ -193,9 +206,9 @@ public class PlayerMove : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.gameObject.tag == "BarrierTrigger")
+        if(coll.gameObject.tag == "Finish")
         {
-            
+            cam.transform.parent = null;
         }
         print("finish test");
 

@@ -93,6 +93,7 @@ public class PlayerStats : MonoBehaviour {
 
     private void LoadStats()
     {
+        
         scoreBoard.SetActive(true);
         scoreTxt[1].text = scoreTxt[0].text;
         totalCarrotDisplay[1].text = totalCarrotDisplay[0].text;
