@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212317425197012262}
   - component: {fileID: 95047802632375968}
   - component: {fileID: 111933141537567592}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Carrot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,9 +40,9 @@ GameObject:
   - component: {fileID: 61233259365963920}
   - component: {fileID: 50466325634153972}
   - component: {fileID: 114952927893140604}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Carrot
-  m_TagString: Untagged
+  m_TagString: CarrotThrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

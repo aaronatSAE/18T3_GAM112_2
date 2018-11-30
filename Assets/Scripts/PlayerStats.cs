@@ -28,17 +28,22 @@ public class PlayerStats : MonoBehaviour {
     {
         //scoreTxt = scoreTxt.GetComponent<TextMeshProUGUI>();
         lifeHeart = GameObject.FindGameObjectsWithTag("LifeBar").OrderBy(go => go.name).ToArray();
+
         carrots = GameObject.FindGameObjectsWithTag("CarrotPickup");
-		
-        foreach(GameObject obj in carrots)
+
+        foreach (GameObject obj in carrots)
         {
             ++totalCarrots;
         }
-	}
+
+
+    }
 
     // Update is called once per frame
     void Update()
     {
+        
+
         timer += Time.deltaTime;
         seconds += Time.deltaTime;
 

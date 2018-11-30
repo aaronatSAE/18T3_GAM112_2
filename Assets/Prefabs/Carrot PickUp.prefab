@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 58341354255351736}
   - component: {fileID: 50856420597519732}
   - component: {fileID: 114845812011622036}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Carrot PickUp
   m_TagString: CarrotPickup
   m_Icon: {fileID: 0}

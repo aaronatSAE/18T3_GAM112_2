@@ -12,6 +12,7 @@ public class SpawnBarrel : MonoBehaviour {
         if(coll.gameObject.tag == "Player")
         {
             GameObject newBarrel = Instantiate(barrel, spawn.position, spawn.rotation);
+            Destroy(gameObject);
         }
     }
 }

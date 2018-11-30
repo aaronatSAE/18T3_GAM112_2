@@ -26,13 +26,14 @@ public class PlayerMove : MonoBehaviour {
 
     private bool hitTaken = false;
     private bool isThrowing = true;
+    private bool gameOver = false;
     private Animator anim;
 
 
     // Use this for initialization
     void Awake()
     {
-        
+
         anim = GetComponent<Animator>();
     }
 
@@ -55,7 +56,7 @@ public class PlayerMove : MonoBehaviour {
 
         else if ((Input.GetButtonDown("Jump")) && doubleJump)
         {
-            
+
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.y, 0f);
             Jump(jumpForce);
             anim.Play("Jumping");
@@ -67,21 +68,15 @@ public class PlayerMove : MonoBehaviour {
     void Update()
     {
 
-        //if (Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround))
-        //{
-            
-        //    grounded = true;
-        //    print("asdasd");
-        //    anim.SetBool("isGrounded", grounded);
-        //}
-        //else
-        //{
-        //    print("blahsls");
-        //    grounded = false;
-        //    anim.SetBool("isGrounded", grounded);
-        //}
-
-        //anim.SetBool("isGrounded", grounded);
+        if (gameOver)
+        {
+            if (playerStats.life <= 0)
+            {
+                LoseGame();
+            }
+            gameOver = false;
+        }
+        
 
         hInput = Input.GetAxisRaw("Horizontal");
 
@@ -111,18 +106,23 @@ public class PlayerMove : MonoBehaviour {
         {
             if (isThrowing)
             {
-                StartCoroutine(SpawnCarrot());
-                isThrowing = !isThrowing;
+                if (playerStats.score > 0)
+                {
+                    playerStats.score -= 1;
+                    StartCoroutine(SpawnCarrot());
+                    isThrowing = !isThrowing;
+                }
+
             }
-            
-            
+
+
         }
         if (Input.GetButtonUp("Fire1"))
         {
             anim.SetBool("isThrowing", false);
         }
 
-        
+
         //Flipping direction character is facing based on players Input
         if (hInput > 0 && !facingRight)
             Flip();
@@ -130,8 +130,16 @@ public class PlayerMove : MonoBehaviour {
             Flip();
     }
 
+    //
+    private void LoseGame()
+    {
+        Jump((jumpForce * 1.5f));
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+    }
+
     // flipping direction of character
-    void Flip()
+    private void Flip()
     {
         facingRight = !facingRight;
         theScale = transform.localScale;
@@ -146,7 +154,7 @@ public class PlayerMove : MonoBehaviour {
         anim.SetTrigger("throw");
 
         GameObject newCarrot = Instantiate(carrot, (new Vector2(spawnPoint.position.x, spawnPoint.position.y)), spawnPoint.rotation) as GameObject;
-        Destroy(newCarrot, 3f);
+        Destroy(newCarrot, 2f);
         yield return new WaitForSeconds(0.5f);
         isThrowing = !isThrowing;
     }

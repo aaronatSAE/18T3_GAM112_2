@@ -597,6 +597,7 @@ MonoBehaviour:
   - {fileID: 4772187584134584}
   anim: {fileID: 1910813045577258, guid: 45758b6ceb20bc344bc61112963703df, type: 2}
   spawn: {fileID: 4013713996126784}
+  myBarrel: {fileID: 212713904777476662}
   speed: 2
   hitAmount: 1000
   force: 500

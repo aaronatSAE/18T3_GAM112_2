@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Carrot : MonoBehaviour {
 
-    private Transform player;
+    private GameObject player;
     private Rigidbody2D rb;
+    private GameObject playerStats;
 
     public Transform carrotSprite;
     public float speed;
@@ -18,7 +19,8 @@ public class Carrot : MonoBehaviour {
     private void Awake()
     {
         
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerStats = GameObject.FindGameObjectWithTag("ScriptManager");
 
         // shoot forward on spawn
         rb = GetComponent<Rigidbody2D>();
@@ -28,7 +30,7 @@ public class Carrot : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        Vector2 direction = (Vector2)player.position - rb.position;
+        Vector2 direction = (Vector2)player.transform.position - rb.position;
 
         direction.Normalize();
 
@@ -44,8 +46,9 @@ public class Carrot : MonoBehaviour {
             carrotSprite.Rotate(new Vector3(0f, 0f, 1f * carrotRotSpeed));
 
             // when carrot returnds to player, destroy carrot
-            if(transform.position.x  < (player.position.x + 1.2f))
+            if(transform.position.x  < (player.transform.position.x + 1.2f))
             {
+                playerStats.GetComponent<PlayerStats>().score += 1;
                 Destroy(gameObject);
             }
         }
@@ -69,6 +72,10 @@ public class Carrot : MonoBehaviour {
             coll.gameObject.GetComponent<Barrel>().carrotHit = true;
             Destroy(gameObject);
         }
-        //Destroy(gameObject);
+        //else if(coll.gameObject.tag != "Pig")
+        //{
+        //    Destroy(gameObject);
+        //}
+
     }
 }

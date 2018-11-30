@@ -8,6 +8,7 @@ public class Barrel : MonoBehaviour {
     public Transform[] spawnPoints;
     public GameObject anim;
     public Transform spawn;
+    public SpriteRenderer myBarrel;
     public float speed = 1f;
     public float hitAmount = 1000f;
     public float force = 10f;
@@ -72,15 +73,14 @@ public class Barrel : MonoBehaviour {
                     Quaternion newRot = new Quaternion(0f, 0f, z, 0f);
                     GameObject newCarrot = Instantiate(carrots, spawnPoints[i].position, newRot);
                     newCarrot.GetComponent<CircleCollider2D>().enabled = false;
-                    if (timer > 2f)
-                    {
-                        newCarrot.GetComponent<CircleCollider2D>().enabled = true;
-                    }
+                    StartCoroutine(ColliderOnOff(newCarrot));
+
                     Rigidbody2D rbTwo = newCarrot.GetComponent<Rigidbody2D>();
                     rbTwo.AddForce(spawnPoints[i].up * force);
                 }
                 Destroy(newAnim, 2.5f);
-                Destroy(gameObject);
+                myBarrel.enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
                 //Jump();
                 Debug.Log("hit top ");
             }
@@ -88,12 +88,13 @@ public class Barrel : MonoBehaviour {
         }
     }
 
-    //IEnumerator ColliderOnOff(GameObject carrot)
-    //{
-    //    carrot.GetComponent<CircleCollider2D>().enabled = false;
-    //    yield return new WaitForSeconds(1);
-    //    print("testing coroutine");
-    //    carrot.GetComponent<CircleCollider2D>().enabled = true;
-    //    yield return new WaitForSeconds(1);
-    //}
+    IEnumerator ColliderOnOff(GameObject carrot)
+    {
+        carrot.GetComponent<CircleCollider2D>().enabled = false;
+        yield return new WaitForSeconds(1);
+        print("testing coroutine");
+        carrot.GetComponent<CircleCollider2D>().enabled = true;
+        Destroy(gameObject);
+        yield return new WaitForSeconds(1);
+    }
 }
