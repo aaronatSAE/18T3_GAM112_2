@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour {
     private float groundRadius = 0.15f;
     private bool isJumping = false;
     private bool doubleJump = true;
-    private float jumpForce = 7.5f;
+    private float jumpForce = 8.5f;
 
     private bool hitTaken = false;
     private bool isThrowing = true;

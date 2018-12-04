@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour {
 
     private GameObject[] carrots;
     private GameObject[] lifeHeart;
-    private int totalCarrots;
+    public int totalCarrots;
     private float timer;
     private float seconds;
     private int minute = 0;

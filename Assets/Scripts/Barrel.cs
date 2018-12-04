@@ -59,12 +59,13 @@ public class Barrel : MonoBehaviour {
 
             if (coll.contacts[0].normal.x > 0f)
             {
-                rb.AddForce(-transform.right * hitAmount);
+                rb.AddForce(Vector2.left * hitAmount);
                 hpScript.life -= 1;
                 Debug.Log("hit left ");
             }
             else if (coll.contacts[0].normal.y < 0f)
             {
+                hpScript.totalCarrots += 3;
                 GameObject newAnim = Instantiate(anim, spawn.position, Quaternion.identity) as GameObject;
                 for(int i = 0; i< spawnPoints.Length; ++i)
                 {

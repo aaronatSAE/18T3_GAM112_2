@@ -578,8 +578,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137569232}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.396, y: -2.6, z: -0.0029895585}
-  m_LocalScale: {x: 1.2001421, y: 1.8687692, z: 0.14215627}
+  m_LocalPosition: {x: 3.396, y: -3.771, z: -0.0029895585}
+  m_LocalScale: {x: 1.2001421, y: 2.1733785, z: 0.14215627}
   m_Children: []
   m_Father: {fileID: 1895012785}
   m_RootOrder: 1
@@ -2644,6 +2644,11 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 2.76}
   serializedVersion: 2
   m_Radius: 2.84
+--- !u!4 &509735049 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 456558, guid: b065ee042ab195f4e8cdd1b0ccdbcba7,
+    type: 2}
+  m_PrefabInternal: {fileID: 586359459}
 --- !u!19719996 &509735053
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -30328,6 +30333,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4411428787548434, guid: b065ee042ab195f4e8cdd1b0ccdbcba7,
     type: 2}
   m_PrefabInternal: {fileID: 586359459}
+--- !u!114 &1468666751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1468666747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97f53f511c571440bc87b240e9d5298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 1
+  player: {fileID: 509735049}
 --- !u!4 &1469234093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4702557125239706, guid: 01d67c44a05aa934ba6a6b8658ff58ee,
