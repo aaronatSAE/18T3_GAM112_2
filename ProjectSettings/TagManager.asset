@@ -13,6 +13,7 @@ TagManager:
   - Start
   - End
   - CarrotThrow
+  - Enemy
   layers:
   - Default
   - TransparentFX
