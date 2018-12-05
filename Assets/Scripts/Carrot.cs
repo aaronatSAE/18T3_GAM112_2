@@ -45,10 +45,12 @@ public class Carrot : MonoBehaviour {
 
             carrotSprite.Rotate(new Vector3(0f, 0f, 1f * carrotRotSpeed));
 
+            
+
             // when carrot returnds to player, destroy carrot
-            if(transform.position.x  < (player.transform.position.x + 1.2f))
+            if (transform.position.x  < (player.transform.position.x + 1.2f))
             {
-                playerStats.GetComponent<PlayerStats>().score += 1;
+                
                 Destroy(gameObject);
             }
         }
@@ -64,6 +66,7 @@ public class Carrot : MonoBehaviour {
             coll.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             coll.gameObject.SendMessage("ActivateLever");
             leverHit = !leverHit;
+            playerStats.GetComponent<PlayerStats>().score += 1;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
 

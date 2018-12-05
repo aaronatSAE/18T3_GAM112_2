@@ -22,6 +22,7 @@ public class PlayerStats : MonoBehaviour {
     public TextMeshProUGUI[] totalCarrotDisplay;
     public TextMeshProUGUI[] timeMinute;
     public TextMeshProUGUI[] timeSeconds;
+    public RawImage[] goldCarrots;
 
     // Use this for initialization
     void Start ()
@@ -49,7 +50,7 @@ public class PlayerStats : MonoBehaviour {
 
         scoreTxt[0].text = score.ToString();
         totalCarrotDisplay[0].text = "     / " + totalCarrots.ToString();
-        timeSeconds[0].text = seconds.ToString("F2");
+        timeSeconds[0].text = seconds.ToString("00.00");
         timeMinute[0].text = (minute).ToString("00") + ":";
 
         if (finish)
@@ -68,7 +69,7 @@ public class PlayerStats : MonoBehaviour {
         switch (life)
         {
             case 0:
-                // player defeated ... do whatever, undecided
+                // player defeated ... 
                 lifeHeart[2].SetActive(false);
                 lifeHeart[1].SetActive(false);
                 lifeHeart[0].SetActive(false);
@@ -93,7 +94,28 @@ public class PlayerStats : MonoBehaviour {
 
     private void LoadStats()
     {
-        
+
+        float ratio = (float)(score / totalCarrots);
+
+        if(ratio< 0.4f)
+        {
+            
+            goldCarrots[0].enabled = true;
+        }
+        else if ((score / totalCarrots) >= 0.4f && (score / totalCarrots) <= 0.9f)
+        {
+            
+            goldCarrots[0].enabled = true;
+            goldCarrots[1].enabled = true;
+        }else
+        {
+            
+            foreach (RawImage carrot in goldCarrots)
+            {
+                carrot.enabled = true;
+            }
+        }
+
         scoreBoard.SetActive(true);
         scoreTxt[1].text = scoreTxt[0].text;
         totalCarrotDisplay[1].text = totalCarrotDisplay[0].text;

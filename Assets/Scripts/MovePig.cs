@@ -29,21 +29,20 @@ public class MovePig : MonoBehaviour {
 
         if (!eating)
         {
-            if (!jumpedOn)
-            {
+            
                 if (!movingLeft)
                 {
                     rb.velocity = Vector2.right * speed * Time.deltaTime;
-
-                    print("moving right");
+                    anim.SetBool("movingLeft", false);
+                    
                 }
                 else
                 {
                     rb.velocity = Vector2.left * speed * Time.deltaTime;
-
-                    print("moving left");
+                    anim.SetBool("movingLeft", true);
+                    
                 }
-            }
+            
             
         }
         
@@ -95,23 +94,23 @@ public class MovePig : MonoBehaviour {
 
         else if (coll.gameObject.tag == "Player")
         {
-            Rigidbody2D rb = coll.gameObject.GetComponent<Rigidbody2D>();
+            Rigidbody2D rbPlayer = coll.gameObject.GetComponent<Rigidbody2D>();
 
-            if (coll.contacts[0].normal.x > 0f)
+            
+            if (coll.contacts[0].normal.y < 0f)
             {
-                
-                rb.AddForce(Vector2.left * hitAmount);
-                hpScript.life -= 1;
-                Debug.Log("hit left ");
-                
-            }
-            else if (coll.contacts[0].normal.y < 0f)
-            {
+                eating = true;
                 rb.velocity = Vector2.zero;
-                jumpedOn = true;
                 GetComponent<BoxCollider2D>().enabled = false;
                 //Jump();
                 Debug.Log("hit top ");
+            }
+            else
+            {
+                coll.gameObject.SendMessage("TakeHit");
+                rbPlayer.AddForce(-transform.right * hitAmount);
+                hpScript.life -= 1;
+                Debug.Log("hit left ");
             }
         }
 

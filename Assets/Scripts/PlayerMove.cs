@@ -208,7 +208,8 @@ public class PlayerMove : MonoBehaviour {
     {
         if(coll.gameObject.tag == "Finish")
         {
-            cam.transform.parent = null;
+            GetComponent<CircleCollider2D>().enabled = false;
+            playerStats.finish = true;
         }
         print("finish test");
 
