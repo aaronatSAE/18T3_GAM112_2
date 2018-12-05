@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1 - Cam.unity
     guid: ab89b3bacaa14de45ad4c44bc5905be4
   - enabled: 1
-    path: Assets/Scenes/Level2 - Alex.unity
+    path: Assets/Scenes/Level2 - Luc.unity
     guid: 734174ae7e6724b46819b5a8e87aad7a
   - enabled: 1
-    path: Assets/Scenes/Level3.unity
+    path: Assets/Scenes/Level3 - Alex.unity
     guid: 6091ecd9cf0949547a04ef33fd441a71
   m_configObjects: {}
