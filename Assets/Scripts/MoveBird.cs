@@ -6,8 +6,11 @@ public class MoveBird : MonoBehaviour {
 
     public GameObject apple;
     public Transform spawnPoint;
-    private Rigidbody2D rb;
     public float speed;
+
+    private Rigidbody2D rb;
+    private float randomSpawnRate;
+    private bool spawnApple = true;
 
 	// Use this for initialization
 	void Awake ()
@@ -18,15 +21,27 @@ public class MoveBird : MonoBehaviour {
 
     private void Start()
     {
-        InvokeRepeating("SpawnApple", 4f, 4f);
+        
+        //InvokeRepeating("SpawnApple", 4f, 4f);
     }
     // Update is called once per frame
     void Update () {
+        randomSpawnRate = Random.Range(1f, 3f);
+
+        if (spawnApple)
+        {
+            spawnApple = false;
+            StartCoroutine(SpawnApple());
+        }
+
         rb.velocity = Vector2.left * speed * Time.deltaTime;
 	}
 
-    private void SpawnApple()
+    IEnumerator SpawnApple()
     {
+        yield return new WaitForSeconds(randomSpawnRate);
         Instantiate(apple, spawnPoint.position, spawnPoint.rotation);
+        yield return new WaitForSeconds(1);
+        spawnApple = true;
     }
 }

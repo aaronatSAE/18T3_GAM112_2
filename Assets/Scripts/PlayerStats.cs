@@ -95,7 +95,8 @@ public class PlayerStats : MonoBehaviour {
     private void LoadStats()
     {
 
-        float ratio = (float)(score / totalCarrots);
+        float ratio = ((float)score / (float)totalCarrots);
+        print(ratio);
 
         if(ratio< 0.4f)
         {

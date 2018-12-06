@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour {
     public Transform groundCheck;
     public LayerMask whatIsGround;
     private bool grounded = false;
-    private float groundRadius = 0.15f;
+    private float groundRadius = 0.3f;
     private bool isJumping = false;
     private bool doubleJump = true;
     private float jumpForce = 8.5f;
